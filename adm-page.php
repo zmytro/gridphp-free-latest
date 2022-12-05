@@ -186,7 +186,7 @@ $g->set_options($grid);
 
 
 $g->set_actions(array(	
-	"add"=>true, // allow/disallow add
+	"add"=>false, // allow/disallow add
 	"edit"=>true, // allow/disallow edit
 	"delete"=>true, // allow/disallow delete
 	"rowactions"=>true, // show/hide row wise edit/del/save option
@@ -274,6 +274,114 @@ $g->set_columns($Cols3,true);
 $out3 = $g->render("list3");
 
 
+
+
+$g = new jqgrid($db_conf);
+
+$grid["rowNum"] = 5; // by default 20
+$grid["sortname"] = 'post_id'; // by default sort grid by this field
+$grid["caption"] = "Alerts"; // caption of grid
+$grid["autowidth"] = false; // expand grid to screen width
+$grid["multiselect"] = true; // allow you to multi-select through checkboxes
+$grid["subGrid"] = false;
+$grid["subgridurl"] = "google.com";
+$grid["loadComplete"] = "function(){ var rowid=2; 
+	jQuery('tr#'+rowid+' td[aria-describedby$=subgrid]').html(''); 
+	jQuery('tr#'+rowid+' td[aria-describedby$=subgrid]').unbind(); 
+	 }"; 
+$grid["subgridparams"] = "employee_id,first_name,last_name,room,department"; // no spaces b/w column names
+
+//$grid["export"] = array("format"=>"pdf", "filename"=>"my-file", "sheetname"=>"test");
+
+$g->set_options($grid);
+
+
+$g->set_actions(array(	
+	"add"=>false, // allow/disallow add
+	"edit"=>true, // allow/disallow edit
+	"delete"=>true, // allow/disallow delete
+	"rowactions"=>true, // show/hide row wise edit/del/save option
+	"export"=>true, // show/hide export to excel option
+	"autofilter" => true, // show/hide autofilter for search
+	"search" => "advance" // show single/multi field search condition (e.g. simple or advance)
+) 
+);
+// you can provide custom SQL query to display data
+
+
+
+$g->select_command = "SELECT * FROM employees e JOIN alerts a ON e.employee_id = a.empl_id";
+
+$col4 = array();// caption of column
+$col4["name"] = "employee_id";
+$col4["visible"] = false;
+$col4["editable"] = false;
+
+ // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias)
+$cols4[] = $col4;
+
+$col4 = array();// caption of column
+$col4["name"] = "first_name";
+$col4["visible"] = true;
+$col4["editable"] = false;
+$cols4[] = $col4;
+
+$col4 = array();// caption of column
+$col4["name"] = "last_name";
+$col4["visible"] = true;
+$col4["editable"] = false;
+$cols4[] = $col4;
+
+$col4 = array();// caption of column
+$col4["name"] = "room";
+$col4["visible"] = false;
+$col4["editable"] = false;
+$cols4[] = $col4;
+
+$col4 = array();// caption of column
+$col4["name"] = "department";
+$col4["visible"] = false;
+$col4["editable"] = false;
+$cols4[] = $col4;
+
+
+$col4 = array();
+$col4["title"] = "EMP ID"; // caption of column
+$col4["name"] = "empl_id";
+$col4["editable"] = false;
+ // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias)
+$cols4[] = $col4;
+
+$col4 = array();
+$col4["title"] = "POST ID"; // caption of column
+$col4["name"] = "post_id";
+$col4["editable"] = false;
+ // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias)
+$cols4[] = $col4;	
+
+$col4 = array();
+$col4["title"] = "notes"; // caption of column
+$col4["name"] = "notes";
+$col4["editable"] = true;
+ // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias)
+$cols4[] = $col4;
+
+$col4 = array();
+$col4["title"] = "status"; // caption of column
+$col4["name"] = "status";
+$col4["editable"] = true;
+ // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias)
+$cols4[] = $col4;
+
+
+
+
+$g->set_columns($cols4,true);
+$out4 = $g->render("list4");
+
+
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
@@ -328,6 +436,8 @@ $out3 = $g->render("list3");
         </nav>
     </header>
 	<div style="margin:10px">
+	<?php echo $out4?>
+	<br>
 	<?php echo $out3?>
 	<br>
 	<?php echo $out2?>

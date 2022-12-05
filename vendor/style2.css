@@ -196,18 +196,30 @@ box-shadow: 1px 5px 200px #dadada;/* Разрешаем перенос элем�
 }
 
 .comment-form {
+  position: absolute;
   padding-top: 26px;
+  left: 33.5%;
+  top: 70%;
+}
+.gb-entries{
+  position: relative;
 }
 .gb-row {
-  display: table;
+  margin: 0;
+   position: absolute;               /* 2 */
+   top: 50%;
+   right: 50%;                         /* 3 */
+   transform: translate(50%, -50%);
   margin: 0 auto;
-  width: 800px;
+  width: auto;
   max-width: 1200px;
   background: #ffffff;
   border: 1px solid #ddd;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .gb-datetime {
   color: #888;
@@ -215,14 +227,32 @@ box-shadow: 1px 5px 200px #dadada;/* Разрешаем перенос элем�
   padding: 5px 0;
 }
 .gb-name {
-  font-weight: bold;
-  font-size: 1.2em;
+  float: left;
+width: 300px;
+margin: 2px;
+  
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
 }
+.gb-user{
+  float: right;
+width: 300px;
+margin: 2px;
+}
+
 .gb-name-a {
   text-transform: uppercase;
   color: #c32525;
+}
+.gb-name-b {
+  text-transform: uppercase;
+  color: #000000;
+  font-size: 32px;
+}
+.gb-name-c {
+  text-transform: uppercase;
+  color: #000000;
+  font-size: 32px;
 }
 .gb-comment { padding-top: 10px; }
 
